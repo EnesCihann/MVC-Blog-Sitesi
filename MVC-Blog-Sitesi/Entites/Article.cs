@@ -11,7 +11,6 @@ namespace MVC_Blog_Sitesi.Entites
         public string Image { get; set; }
         public DateTime CreationTime { get; set; } = DateTime.Now;
 
-        public int? AuthorId { get; set; }
         public AppAuthor Author { get; set; }
 
     }

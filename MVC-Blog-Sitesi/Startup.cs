@@ -1,9 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC_Blog_Sitesi.AppDbContext;
+using MVC_Blog_Sitesi.Entites;
+using MVC_Blog_Sitesi.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +29,10 @@ namespace MVC_Blog_Sitesi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<AppIdentityDbContext>(Options => Options.UseSqlServer(Configuration.GetConnectionString("ConStr")));
+            services.AddIdentity<AppAuthor, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddTransient(typeof(IArticleRepository<>), typeof(ArticleRepository<>));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +52,8 @@ namespace MVC_Blog_Sitesi
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

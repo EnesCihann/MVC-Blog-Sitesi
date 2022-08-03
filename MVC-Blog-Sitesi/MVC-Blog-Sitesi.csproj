@@ -20,8 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entites\Abstract\" />
-  </ItemGroup>
-
 </Project>
