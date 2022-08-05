@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Blog_Sitesi.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20220802155033_init")]
+    [Migration("20220804151830_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace MVC_Blog_Sitesi.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MVC_Blog_Sitesi.Entites.AppAuthor", b =>
+            modelBuilder.Entity("MVC_Blog_Sitesi.Entites.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -37,7 +37,6 @@ namespace MVC_Blog_Sitesi.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -52,8 +51,8 @@ namespace MVC_Blog_Sitesi.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("image");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -113,7 +112,7 @@ namespace MVC_Blog_Sitesi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AuthorId")
+                    b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
@@ -123,8 +122,8 @@ namespace MVC_Blog_Sitesi.Migrations
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("image");
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -133,7 +132,7 @@ namespace MVC_Blog_Sitesi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Articles");
                 });
@@ -271,11 +270,11 @@ namespace MVC_Blog_Sitesi.Migrations
 
             modelBuilder.Entity("MVC_Blog_Sitesi.Entites.Article", b =>
                 {
-                    b.HasOne("MVC_Blog_Sitesi.Entites.AppAuthor", "Author")
+                    b.HasOne("MVC_Blog_Sitesi.Entites.AppUser", "AppUser")
                         .WithMany("Articles")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AppUserId");
 
-                    b.Navigation("Author");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -289,7 +288,7 @@ namespace MVC_Blog_Sitesi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("MVC_Blog_Sitesi.Entites.AppAuthor", null)
+                    b.HasOne("MVC_Blog_Sitesi.Entites.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -298,7 +297,7 @@ namespace MVC_Blog_Sitesi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MVC_Blog_Sitesi.Entites.AppAuthor", null)
+                    b.HasOne("MVC_Blog_Sitesi.Entites.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -313,7 +312,7 @@ namespace MVC_Blog_Sitesi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MVC_Blog_Sitesi.Entites.AppAuthor", null)
+                    b.HasOne("MVC_Blog_Sitesi.Entites.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -322,14 +321,14 @@ namespace MVC_Blog_Sitesi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("MVC_Blog_Sitesi.Entites.AppAuthor", null)
+                    b.HasOne("MVC_Blog_Sitesi.Entites.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MVC_Blog_Sitesi.Entites.AppAuthor", b =>
+            modelBuilder.Entity("MVC_Blog_Sitesi.Entites.AppUser", b =>
                 {
                     b.Navigation("Articles");
                 });

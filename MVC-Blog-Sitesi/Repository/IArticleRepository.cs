@@ -17,8 +17,8 @@ namespace MVC_Blog_Sitesi.Repository
 
         IEnumerable<T> GetWhere(Expression<Func<T, bool>> Predicate); 
         T SingleOrDefault(Expression<Func<T, bool>> Predicate);
-        IEnumerable<AppAuthor> GetAllIncludeAuthors();
+        IEnumerable<AppUser> GetAllIncludeAuthors();
 
-        AppAuthor GetByIdIncludeAuthors(string id);
+        AppUser GetByIdIncludeAuthors(string id);
     }
 }

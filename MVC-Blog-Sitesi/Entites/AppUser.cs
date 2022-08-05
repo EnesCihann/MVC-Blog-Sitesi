@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace MVC_Blog_Sitesi.Entites
 {
-    public class AppAuthor:IdentityUser
+    public class AppUser:IdentityUser
     {
-        public AppAuthor()
+        public AppUser()
         {
             Articles = new HashSet<Article>();
         }

@@ -19,7 +19,7 @@ namespace MVC_Blog_Sitesi.Repository
         }
        
 
-        public AppAuthor GetByIdIncludeAuthors(string id)
+        public AppUser GetByIdIncludeAuthors(string id)
         {
             return db.Users.Include(a=>a.Articles).FirstOrDefault(a => a.Id==id);
         }
@@ -87,7 +87,7 @@ namespace MVC_Blog_Sitesi.Repository
             return db.Set<T>().SingleOrDefault(Predicate);
         }
 
-        IEnumerable<AppAuthor> IArticleRepository<T>.GetAllIncludeAuthors()
+        IEnumerable<AppUser> IArticleRepository<T>.GetAllIncludeAuthors()
         {
             return db.Users.Include(a => a.Articles);
         }

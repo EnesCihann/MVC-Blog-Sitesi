@@ -30,7 +30,7 @@ namespace MVC_Blog_Sitesi
         {
             services.AddControllersWithViews();
             services.AddDbContext<AppIdentityDbContext>(Options => Options.UseSqlServer(Configuration.GetConnectionString("ConStr")));
-            services.AddIdentity<AppAuthor, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient(typeof(IArticleRepository<>), typeof(ArticleRepository<>));
             
         }

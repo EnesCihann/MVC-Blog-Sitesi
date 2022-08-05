@@ -1,0 +1,32 @@
+﻿@model UserWithArticleVM
+
+<h1 class="bg-info text-white">Create Article</h1>
+<a asp-action="Index" class="btn btn-secondary">Back</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+
+
+<form asp-action="Create" asp-controller="Article" enctype="multipart/form-data" method="post">
+	<div class="mb-3">
+  <label asp-for="Title" class="form-label"></label>
+  <input asp-for="Title" type="text" class="form-control text-black-50" id="exampleFormControlInput1" placeholder="Başlık"  >
+</div>
+<div class="form-floating">
+  <label asp-for="Content" class="form-label"></label>
+  <textarea asp-for="Content" class="form-control" placeholder="Makale İçeriği..."  style="height: 400px"></textarea>  
+</div>
+<div class="mb-3">
+  <label asp-for="Image" class="form-label">Resim eklemek için dosya seçiniz.</label>
+  <input asp-for="Image" class="form-control" type="file" >
+</div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top:10px">
+  <input type="submit" value="Kaydet" class="btn btn-primary me-md-2" />
+</div>
+</form>
+
+@if(ViewBag.Message != null)
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewBag.Message
+	</div>
+}
